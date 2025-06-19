@@ -19,6 +19,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun TemperatureConverter() {
     var inputText by remember { mutableStateOf("") }
+    var resultText by remember { mutableStateOf("") }
 
     MaterialTheme {
         Surface( modifier = Modifier.fillMaxSize() ) {
@@ -29,6 +30,20 @@ fun TemperatureConverter() {
                     label = { Text("Coloque a temperatura") },
                     modifier = Modifier.fillMaxWidth()
                 )
+
+                Button(onClick = {
+                    val input = inputText.toDoubleOrNull()
+                    resultText = if (input != null) {
+                        "Resultado: %.2f °F".format((input * 9 / 5) + 32)
+                    } else {
+                        "Coloque um valor válido"
+                    }
+                }) {
+                    Text("Celsius para Fahrenheit")
+                }
+
+                Text(text = resultText)
+
             }
         }
     }
