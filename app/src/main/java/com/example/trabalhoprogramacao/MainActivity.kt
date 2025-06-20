@@ -6,6 +6,7 @@ import androidx.compose.runtime.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 
 
 class MainActivity : ComponentActivity() {
@@ -21,9 +22,17 @@ class MainActivity : ComponentActivity() {
 fun TemperatureConverter() {
     var inputText by remember { mutableStateOf("") }
     var resultText by remember { mutableStateOf("") }
+    var colorBack by remember { mutableStateOf(true) }
+    var clicado by remember { mutableStateOf(false) }
+
+    val backgroundColor = if (colorBack) Color.LightGray else Color.Gray
+    val corDoBotao = if (clicado) Color.Red else Color.Green
+
 
     MaterialTheme {
-        Surface( modifier = Modifier.fillMaxSize() ) {
+        Surface( modifier = Modifier.fillMaxSize(),
+                color = backgroundColor
+        ) {
             Column() {
                 TextField(
                     value = inputText,
@@ -56,6 +65,12 @@ fun TemperatureConverter() {
 
                 Text(text = resultText)
 
+                Button(onClick = {
+                    colorBack = !colorBack
+                    clicado = !clicado
+                }, colors = ButtonDefaults.buttonColors(containerColor = corDoBotao)) {
+                    Text("Mudar Cor de Fundo")
+                }
             }
         }
     }
