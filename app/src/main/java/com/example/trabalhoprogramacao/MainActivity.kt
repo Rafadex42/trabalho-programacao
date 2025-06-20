@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +41,17 @@ fun TemperatureConverter() {
                     }
                 }) {
                     Text("Celsius para Fahrenheit")
+                }
+
+                Button(onClick = {
+                    val input = inputText.toDoubleOrNull()
+                    resultText = if (input != null) {
+                        "Resultado: %.2f °C".format((input - 32) * 5 / 9)
+                    } else {
+                        "Coloque um valor válido"
+                    }
+                }) {
+                    Text("Fahrenheit para Celsius")
                 }
 
                 Text(text = resultText)
