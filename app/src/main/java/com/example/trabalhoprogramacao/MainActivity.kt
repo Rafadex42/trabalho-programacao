@@ -7,6 +7,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.Alignment
+
 
 
 class MainActivity : ComponentActivity() {
@@ -33,13 +36,18 @@ fun TemperatureConverter() {
         Surface( modifier = Modifier.fillMaxSize(),
                 color = backgroundColor
         ) {
-            Column() {
+            Column(
+                modifier = Modifier.padding(16.dp).fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally) {
                 TextField(
                     value = inputText,
                     onValueChange = { inputText = it },
                     label = { Text("Coloque a temperatura") },
                     modifier = Modifier.fillMaxWidth()
                 )
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Button(onClick = {
                     val input = inputText.toDoubleOrNull()
@@ -52,6 +60,8 @@ fun TemperatureConverter() {
                     Text("Celsius para Fahrenheit")
                 }
 
+                Spacer(modifier = Modifier.height(8.dp))
+
                 Button(onClick = {
                     val input = inputText.toDoubleOrNull()
                     resultText = if (input != null) {
@@ -63,7 +73,11 @@ fun TemperatureConverter() {
                     Text("Fahrenheit para Celsius")
                 }
 
+                Spacer(modifier = Modifier.height(16.dp))
+
                 Text(text = resultText)
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Button(onClick = {
                     colorBack = !colorBack
